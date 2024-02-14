@@ -5,7 +5,8 @@
   <title>Contact</title>
   <link rel="stylesheet" type="text/css" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
+  <!-- Ajouter Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -16,41 +17,76 @@
         <li><a href="chambres.html">Chambres</a></li>
         <li><a href="services.html">Services</a></li>
         <li><a href="contact.html">Contact</a></li>
-
         <li class="right-btn"><a href="inscrit.html"><i class="fas fa-user-plus"></i> Inscription</a></li>
         <li class="right-btn"><a href="reservation.html"><i class="fas fa-calendar-plus"></i> Réservation</a></li>
-
       </ul>
     </nav>
   </header>
   <section class="contact-section">
-    <h2>Contactez-nous</h2>
-    <p>Pour toute question ou réservation, n'hésitez pas à nous contacter.</p>
-    <div class="contact-info">
-      <p><strong>Adresse:</strong> 123 Djerba Houmt essouk, Mednin , Tunisie</p>
-      <p><strong>Téléphone:</strong> +1234 567 890</p>
-      <p><strong>Email:</strong> hanenammar46@gmail.com</p>
-      <p><strong>Personnel à contacter:</strong> Hanen Ammar</p>
+    <h2 style="text-align: center;">Contactez-nous</h2>
+    <p style="text-align: center;">Pour toute question ou réservation, n'hésitez pas à nous contacter.</p>
+    <div class="contact-info row" style="margin-left: 5px;margin-right: 5px; margin-bottom: 150px;">
+      <!-- Première personne à contacter -->
+      <div class="card col-md-6">
+        <img style="border-radius: 10% 30% 50% 70%;" src="https://media.licdn.com/dms/image/D4D03AQE01K754pm8Yw/profile-displayphoto-shrink_800_800/0/1703497574245?e=1713398400&v=beta&t=F_jC17TINTF3ZyFCcFbsVKEKiByqw1QfCKtHcV1VLoU" width="200" height="200">
+        <p><strong>Nom:</strong> Ahmed Yakoub</p>
+        <p><strong>Téléphone:</strong> +1234 567 890</p>
+        <p><strong>Email:</strong> AhmedYakoub@gmail.com</p>
+        <div class="col-12 mt-3">
+          <!-- Ajouter les liens vers les comptes sociaux -->
+          <a href="https://www.facebook.com/profile.php?id=100013362610365" class="btn btn-outline-primary"><i class="fab fa-facebook-f"></i> Facebook</a>
+          <a href="https://www.linkedin.com/in/yakoub-ahmed-6a87bb229/" class="btn btn-outline-primary"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+          <a href="#" class="btn btn-outline-primary"><i class="fab fa-github"></i> GitHub</a>
+          <a href="mailto:john@example.com" class="btn btn-outline-primary"><i class="fas fa-envelope"></i> Gmail</a>
+        </div>
+        <div class="contact-form" style="margin-left: 5px;margin-right: 5px;">
+          <h3>Envoyez-nous un message</h3>
+          <form action="#" method="post">
+            <label for="name">Nom:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+            <button type="submit" class="btn btn-outline-primary">Envoyer</button>
+          </form>
+        </div>
+      </div>
+      <!-- Deuxième personne à contacter -->
+      <div class="card col-md-6">
+        <img style="border-radius: 10% 30% 50% 70%;" height="200" width="200" src="https://media.licdn.com/dms/image/D4D03AQGaRzZFDRzCyw/profile-displayphoto-shrink_400_400/0/1703372864141?e=1713398400&v=beta&t=j-cqABFYxj_T683eakzevCiOdLrqml7cl4j5LNzQajE" alt="">
+        <p><strong>Nom:</strong> Haythem Kouka</p>
+        <p><strong>Téléphone:</strong> +9876 543 210</p>
+        <p><strong>Email:</strong> HaythemKouka@gmail.com</p>
+        <div class="col-12 mt-3">
+          <!-- Ajouter les liens vers les comptes sociaux -->
+          <a href="#" class="btn btn-outline-primary"><i class="fab fa-facebook-f"></i> Facebook</a>
+          <a href="https://www.linkedin.com/in/haythem-kouka-0b3b331a2/" class="btn btn-outline-primary"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+          <a href="https://github.com/HaythemKouka/HaythemKouka" class="btn btn-outline-primary"><i class="fab fa-github"></i> GitHub</a>
+          <a href="mailto:jane@example.com" class="btn btn-outline-primary"><i class="fas fa-envelope"></i> Gmail</a>
+        </div>
+
+        <div class="contact-form" style="margin-left: 5px;margin-right: 5px;">
+          <h3>Envoyez-nous un message</h3>
+          <form action="#" method="post">
+            <label for="name">Nom:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+            <button type="submit" class="btn btn-outline-primary">Envoyer</button>
+          </form>
+        </div>
+      </div>
     </div>
-    <div class="contact-form">
-      <h3>Envoyez-nous un message</h3>
-      <form action="#" method="post">
-        <label for="name">Nom:</label>
-        <input type="text" id="name" name="name" required>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" rows="4" required></textarea>
-
-        <button type="submit">Envoyer</button>
-      </form>
-    </div>
   </section>
   <footer>
     <p>&copy; 2023 Réservation d'Hôtel</p>
   </footer>
+  <!-- Ajouter Bootstrap JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
