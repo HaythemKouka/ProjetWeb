@@ -1,45 +1,87 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <title>Réservation d'Hôtel</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+  <link href="./bootstrap-5.3.2/bootstrap-5.3.2/dist/js/bootstrap.min.js" rel="stylesheet">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Réservation d'Hôtel</title>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
+
 <body>
-         <header>
-            <nav>
-                <ul>
-                    <li><a href="acceuil.html">Accueil</a></li>
-                    <li><a href="chambres.html">Chambres</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="inscription.html">Réserver</a></li>
-                </ul>
-            </nav>
-        </header>
-        <h1>Réservation d'Hôtel</h1>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="acceuil.html">Accueil</a></li>
+        <li><a href="chambres.html">Chambres</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="inscription.html">Réserver</a></li>
+      </ul>
+    </nav>
+  </header>
+  <h1 style="text-align: center;">Réservation d'Hôtel</h1>
 
-     <section class="booking-form">
-        <h2>Réservez votre séjour</h2>
-        <form action="#" method="post">
-            <label for="check-in">Date d'arrivée:</label>
-            <input type="date" id="check-in" name="check-in" required>
-<br>
-            <label for="check-out">Date de départ:</label>
-            <input type="date" id="check-out" name="check-out" required>
-            <br>
+  <section class="booking-form">
+    <h2 style="align-content:center ;">Réservez votre séjour</h2>
+    <form action="#" method="post">
+      <label for="check-in">Date d'arrivée:</label>
+      <input type="date" id="check-in" name="check-in" required>
 
-            <label for="guests">Nombre d'invités:</label>
-            <input type="number" id="guests" name="guests" min="1" required>
-            <br>
+      <label for="check-out">Date de départ:</label>
+      <input type="date" id="check-out" name="check-out" required>
 
-            <button type="submit">Réserver</button>
-        </form>
-    </section>
-    <footer>
-        <p>&copy; 2023 Réservation d'Hôtel</p>
-    </footer>
+      <label for="guests">Nombre d'invités:</label>
+      <input type="number" id="guests" name="guests" min="1" required>
+
+      <!-- Case à cocher -->
+      <div>
+        <label for="breakfast">Petit déjeuner inclus:</label>
+        <input type="checkbox" id="breakfast" name="breakfast">
+      </div>
+
+      <!-- Liste déroulante -->
+      <label for="room-type">Type de chambre:</label>
+      <select id="room-type" name="room-type">
+        <option value="standard">Standard</option>
+        <option value="deluxe">Deluxe</option>
+        <option value="suite">Suite</option>
+      </select>
+
+      <!-- Boutons radio -->
+      <p>Préférence de lit:</p>
+      <div><label for="bed-single">Lit simple</label>
+        <input type="radio" id="bed-single" name="bed-type" value="single">
+      </div>
+      <div>
+        <label for="bed-double">Lit double</label>
+        <input type="radio" id="bed-double" name="bed-type" value="double">
+      </div>
+
+      <!-- Bouton de soumission -->
+      <button type="submit">Réserver</button>
+      <div class="alert alert-warning" role="alert">
+        Pour valider la réservation, il faut remplir tous les champs.
+      </div>
+    </form>
+
+  </section>
+  <footer>
+    <p>&copy; 2023 Réservation d'Hôtel</p>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
