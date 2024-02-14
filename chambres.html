@@ -4,32 +4,19 @@
 <head>
   <title>Chambres</title>
   <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
     .room-card {
       margin: 10px;
+      margin-left: 20px;
+      margin-right: 20px;
     }
 
-    body {
-      margin-left: 10px;
-      margin-right: 10px;
-      margin-bottom: 60px;
-      /* Add margin to create space for the footer */
-    }
 
     .card-img-top {
       height: 300px;
-    }
-
-    footer {
-      position: relative;
-      bottom: 0;
-      width: 100%;
-      height: 60px;
-      /* Set the height of the footer */
-      background-color: #f5f5f5;
-      text-align: center;
-      padding-top: 20px;
     }
   </style>
 </head>
@@ -42,44 +29,47 @@
         <li><a href="chambres.html">Chambres</a></li>
         <li><a href="services.html">Services</a></li>
         <li><a href="contact.html">Contact</a></li>
-        <li><a href="inscription.html">Réserver</a></li>
+
+        <li class="right-btn"><a href="inscrit.html"><i class="fas fa-user-plus"></i> Inscription</a></li>
+        <li class="right-btn"><a href="reservation.html"><i class="fas fa-calendar-plus"></i> Réservation</a></li>
+
       </ul>
     </nav>
   </header>
-  <h1>Nos chambres</h1>
-  <section class="room-section">
-    <h2>Nos Chambres</h2>
+  <section class="room-section" style="margin-bottom: 60px;">
+    <h2 style="     margin-left: 20px;
+    margin-right: 20px; text-align: center;">Nos Chambres</h2>
     <div class="row">
       <div class="col-md-4">
         <div class="card room-card">
-          <img src="./images/ch2.jpg" alt="Chambre Deluxe" class="card-img-top">
+          <img src="./images/ch2.jpg" alt="Chambre Deluxe" style="border-radius: 25% 10%;" class="card-img-top">
           <div class="card-body">
             <h3 class="card-title">Chambre Deluxe</h3>
             <p class="card-text">Profitez du luxe dans notre chambre Deluxe, équipée de tout le confort moderne.</p>
             <p class="card-text">Prix par nuit: $200</p>
-            <a href="inscription.html" class="btn btn-primary">Réservez maintenant</a>
+            <a href="reservation.html" class="btn btn-primary">Réservez maintenant</a>
           </div>
         </div>
       </div>
       <div class="col-md-4">
         <div class="card room-card">
-          <img src="./images/ch3.jpg" alt="Suite Junior" class="card-img-top">
+          <img src="./images/ch3.jpg" alt="Suite Junior" style="border-radius: 25% 10%;" class="card-img-top">
           <div class="card-body">
-            <h3 class="card-title">Suite Junior</h3>
+            <h3 class="card-title" style="border-radius: 25% 10% ;">Suite Junior</h3>
             <p class="card-text">Détendez-vous dans notre Suite Junior, offrant une vue imprenable sur la ville.</p>
             <p class="card-text">Prix par nuit: $300</p>
-            <a href="inscription.html" class="btn btn-primary">Réservez maintenant</a>
+            <a href="reservation.html" class="btn btn-primary">Réservez maintenant</a>
           </div>
         </div>
       </div>
       <div class="col-md-4">
         <div class="card room-card">
-          <img src="./images/ch4.jpg" alt="Chambre Standard" class="card-img-top">
+          <img src="./images/ch4.jpg" alt="Chambre Standard" style="border-radius: 25% 10%;" class="card-img-top">
           <div class="card-body">
             <h3 class="card-title">Chambre Standard</h3>
             <p class="card-text">Une chambre confortable avec des commodités modernes à un prix abordable.</p>
             <p class="card-text">Prix par nuit: $150</p>
-            <a href="inscription.html" class="btn btn-primary">Réservez maintenant</a>
+            <a href="reservation.html" class="btn btn-primary">Réservez maintenant</a>
           </div>
         </div>
       </div>
@@ -87,32 +77,32 @@
     <div class="row">
       <div class="col-md-4">
         <div class="card room-card">
-          <img src="./images/ch5.jpg" alt="Suite Exécutive" class="card-img-top">
+          <img src="./images/ch5.jpg" alt="Suite Exécutive" style="border-radius: 25% 10%;" class="card-img-top">
           <div class="card-body">
-            <h3 class="card-title">Suite Exécutive</h3>
-            <p class="card-text">Expérience de luxe ultime avec notre suite exécutive, parfaite pour les séjours prolongés.</p>
-            <p class="card-text">Prix par nuit: $400</p>
-            <a href="inscription.html" class="btn btn-primary">Réservez maintenant</a>
+            <h3 class="card-title" ">Suite Exécutive</h3>
+            <p class=" card-text">Expérience de luxe ultime avec notre suite exécutive, parfaite pour les séjours prolongés.</p>
+              <p class="card-text">Prix par nuit: $400</p>
+              <a href="reservation.html" class="btn btn-primary">Réservez maintenant</a>
           </div>
         </div>
       </div>
       <div class="col-md-4">
         <div class="card room-card">
-          <img src="./images/ch6.jpg" alt="Chambre Familiale" class="card-img-top">
+          <img src="./images/ch6.jpg" style="border-radius: 25% 10%;" alt="Chambre Familiale" class="card-img-top">
           <div class="card-body">
             <h3 class="card-title">Chambre Familiale</h3>
             <p class="card-text">Idéale pour les familles, cette chambre spacieuse offre confort et commodités pour tous.</p>
             <p class="card-text">Prix par nuit: $250</p>
-            <a href="inscription.html" class="btn btn-primary">Réservez maintenant</a>
+            <a href="reservation.html" class="btn btn-primary">Réservez maintenant</a>
           </div>
         </div>
       </div>
     </div>
-    <footer>
-      <p>&copy; 2023 Réservation d'Hôtel</p>
-    </footer>
-  </section>
 
+  </section>
+  <footer>
+    <p>&copy; 2023 Réservation d'Hôtel</p>
+  </footer>
 </body>
 
 </html>
