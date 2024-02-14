@@ -1,0 +1,91 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+ 
+}
+
+.logo a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+.hero-section {
+    position: relative;
+}
+
+.fh5co-parallax {
+    background-color: #555;
+    background-attachment: fixed;
+    background-size: cover;
+    position: relative;
+    height: 600px;
+    width: 100%;
+}
+
+.fh5co-parallax .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.hero-section h1 {
+    color: #fff;
+}
+
+.video-section {
+    margin-top: 20px;
+}
+
+.card-section {
+    display: flex;
+    justify-content: space-around;
+    padding: 50px 0;
+}
+
+.card {
+    width: 300px;
+    background-color: #eee;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 0 10px;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
