@@ -14,7 +14,10 @@
     .animated-text {
       overflow: hidden;
     }
-
+    .features-section .card {
+      width: 18rem;
+      margin: 10px;
+    }
     footer {
       position: relative;
       bottom: 0;
@@ -55,20 +58,22 @@
 </head>
 
 <body>
-  <header>
+  <header style="background-color: rgb(136, 199, 255);">
+    <div class="animated-text">
+      <h1 style="color: rgb(207, 248, 255);">Bienvenue sur notre site de réservation d'hôtel</h1>
+    </div>
     <nav>
       <ul>
-        <li><a href="acceuil.html">Accueil</a></li>
-        <li><a href="chambres.html">Chambres</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="inscription.html">Réserver</a></li>
+        <li style="color: #f5f5f5;"><a href="acceuil.html">Accueil</a></li>
+        <li  style="color: #f5f5f5;"><a href="chambres.html">Chambres</a></li>
+        <li style="color: #f5f5f5;"><a href="services.html">Services</a></li>
+        <li style="color: #f5f5f5;"><a href="contact.html">Contact</a></li>
+        <li style="color: #f5f5f5;"><a href="inscription.html">Réserver</a></li>
       </ul>
     </nav>
   </header>
-  <div class="animated-text">
-    <h1>Bienvenue sur notre site de réservation d'hôtel</h1>
-  </div>
+
+ 
   <section class="hero-section">
     <div class="animated-text">
       <h2>Bienvenue à l'Hôtel de Luxe</h2>
@@ -76,7 +81,6 @@
     <div class="animated-text">
       <p>Découvrez le confort ultime et l'élégance dans notre hôtel cinq étoiles. Réservez votre séjour dès aujourd'hui et profitez d'une expérience inoubliable.</p>
     </div> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reservationModal">Réservez maintenant</button> <br><br><br>
-    <video src="./images/videoHome.webm" controls></video><br><br><br>
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -102,7 +106,8 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </a>
-    </div>
+    </div><br><br><br>
+    <video src="./images/videoHome.webm" controls></video><br><br><br>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
@@ -110,22 +115,44 @@
   </section>
   <section class="features-section">
     <h2>Nos Services</h2>
-    <div class="feature">
-      <img src="./images/hotelservices.jpg" alt="Service 1">
-      <h3>Chambres de Luxe</h3>
-      <p>Détendez-vous dans nos chambres spacieuses et élégamment décorées.</p>
-    </div>
-    <div class="feature">
-      <img src="./images/meals.jpg" alt="Service 2">
-      <h3>Restaurant Gastronomique</h3>
-      <p>Dégustez une cuisine exquise préparée par nos chefs renommés.</p>
-    </div>
-    <div class="feature">
-      <img src="./images/ch1.jpg" alt="Service 3">
-      <h3>Spa de Luxe</h3>
-      <p>Offrez-vous une expérience de bien-être avec nos soins spa relaxants.</p>
+
+    <!-- Bootstrap grid system for placing cards in the same line -->
+    <div class="row">
+      <!-- Card for Service 1 -->
+      <div class="col-sm-4">
+        <div class="card">
+          <img src="./images/hotelservices.jpg" class="card-img-top" alt="Service 1">
+          <div class="card-body">
+            <h3 class="card-title">Chambres de Luxe</h3>
+            <p class="card-text">Détendez-vous dans nos chambres spacieuses et élégamment décorées.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card for Service 2 -->
+      <div class="col-sm-4">
+        <div class="card">
+          <img src="./images/meals.jpg" class="card-img-top" alt="Service 2">
+          <div class="card-body">
+            <h3 class="card-title">Restaurant Gastronomique</h3>
+            <p class="card-text">Dégustez une cuisine exquise préparée par nos chefs renommés.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card for Service 3 -->
+      <div class="col-sm-4">
+        <div class="card">
+          <img src="./images/ch1.jpg" class="card-img-top" alt="Service 3">
+          <div class="card-body">
+            <h3 class="card-title">Spa de Luxe</h3>
+            <p class="card-text">Offrez-vous une expérience de bien-être avec nos soins spa relaxants.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
+
 
 
   <div class="modal fade" id="reservationModal" tabindex="-1" role="dialog" aria-labelledby="reservationModalLabel" aria-hidden="true">
