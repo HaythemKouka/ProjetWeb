@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+  <link href="./bootstrap-5.3.2/bootstrap-5.3.2/dist/js/bootstrap.min.js" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscription Client</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/css/bootstrap.min.css">
+  <style>
+
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="acceuil.html">Accueil</a></li>
+        <li><a href="chambres.html">Chambres</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+
+        <li class="right-btn"><a href="inscrit.html"><i class="fas fa-user-plus"></i> Inscription</a></li>
+        <li class="right-btn"><a href="reservation.html"><i class="fas fa-calendar-plus"></i> Réservation</a></li>
+
+      </ul>
+    </nav>
+  </header>
+  <div class="container">
+    <h2 style="text-align: center;">Inscription Client</h2>
+    <section class="booking-form">
+      <form>
+        <div class="mb-3">
+          <label for="nom" class="form-label">Nom</label>
+          <input type="text" class="form-control" id="nom" required>
+        </div>
+        <div class="mb-3">
+          <label for="prenom" class="form-label">Prénom</label>
+          <input type="text" class="form-control" id="prenom" required>
+        </div>
+        <div class="mb-3">
+          <label for="naiss" class="form-label">Date Naissance</label>
+          <input type="date" class="form-control" id="naiss" required>
+        </div>
+        <div class="mb-3">
+          <label for="lieu" class="form-label">Lieu De Naissance</label>
+          <input type="text" class="form-control" id="lieu" required>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Adresse Email</label>
+          <input type="email" class="form-control" id="email" required>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Mot de passe</label>
+          <input type="password" class="form-control" id="password" required>
+        </div>
+        <div class="mb-3">
+          <label for="confirm-password" class="form-label">Confirmer le mot de passe</label>
+          <input type="password" class="form-control" id="confirm-password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">S'inscrire</button>
+      </form>
+    </section>
+  </div>
+  <footer>
+    <p>&copy; 2023 Réservation d'Hôtel</p>
+  </footer>
+</body>
+
+</html>
