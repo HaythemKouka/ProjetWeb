@@ -14,6 +14,15 @@
       margin-right: 20px;
     }
 
+    .card-img-top {
+      height: 300px;
+      transition: transform 0.5s ease;
+    }
+
+    .card-img-top:hover {
+      transform: scale(1.1);
+    }
+
     footer {
       position: relative;
       bottom: 0;
@@ -24,6 +33,7 @@
       text-align: center;
       padding-top: 20px;
     }
+
     .card-img-top {
       height: 300px;
     }
@@ -37,7 +47,7 @@
     <nav>
       <ul>
         <li style="color: #f5f5f5;"><a href="acceuil.html">Accueil</a></li>
-        <li  style="color: #f5f5f5;"><a href="chambres.html">Chambres</a></li>
+        <li style="color: #f5f5f5;"><a href="chambres.html">Chambres</a></li>
         <li style="color: #f5f5f5;"><a href="services.html">Services</a></li>
         <li style="color: #f5f5f5;"><a href="contact.html">Contact</a></li>
         <!-- <li style="color: #f5f5f5;"><a href="inscription.html">Réserver</a></li> -->
@@ -46,9 +56,9 @@
       </ul>
     </nav>
   </header>
-        <h1 style="color: rgb(10, 13, 14);margin-left: 40%;">Nos Chambre</h1>
+  <h1 style="color: rgb(10, 13, 14);margin-left: 40%;">Nos Chambre</h1>
 
-   <section class="room-section">
+  <section class="room-section">
     <div class="row">
       <div class="col-md-4">
         <div class="card room-card">
@@ -79,7 +89,7 @@
             <h3 class="card-title">Chambre Standard</h3>
             <p class="card-text">Une chambre confortable avec des commodités modernes à un prix abordable.</p>
             <p class="card-text">Prix par nuit: $150</p>
-            <a href="reservation.html" class="btn btn-primary">Réservez maintenant</a>
+            <a href="reservation.html" class="btn btn-danger" disabled="true">N'est pas disponible pour le moment</a>
           </div>
         </div>
       </div>
@@ -91,7 +101,7 @@
           <div class="card-body">
             <h3 class="card-title" ">Suite Exécutive</h3>
             <p class=" card-text">Expérience de luxe ultime avec notre suite exécutive, parfaite pour les séjours prolongés.</p>
-              <p class="card-text">Prix par nuit: $400</p>
+              <p class="card-text">Prix par nuit: <b>$400 <sup style=" padding: 5px;  color: #ffffff; background-color: rgb(234, 10, 84);border-radius: 33mm;">Remise de 23%</sup></b></p>
               <a href="reservation.html" class="btn btn-primary">Réservez maintenant</a>
           </div>
         </div>

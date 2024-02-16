@@ -6,9 +6,17 @@
   <link rel="stylesheet" type="text/css" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<style>
+  <style>
+    .card-img-top {
+      height: 300px;
+      transition: transform 0.5s ease;
+    }
 
-footer {
+    .card-img-top:hover {
+      transform: scale(1.1);
+    }
+
+    footer {
       position: relative;
       bottom: 0;
       width: 100%;
@@ -18,7 +26,7 @@ footer {
       text-align: center;
       padding-top: 20px;
     }
-</style>
+  </style>
 </head>
 
 <body>
@@ -39,7 +47,7 @@ footer {
   <h1 style="color: rgb(10, 13, 14);margin-left: 40%;">Nos Services</h1>
 
   <section class="services-section">
- 
+
     <div class="row">
       <!-- Card for Service 1 -->
       <div class="col-sm-6 col-md-3">
