@@ -5,6 +5,7 @@
   <title>Accueil</title>
   <link rel="stylesheet" type="text/css" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <meta charset="UTF-8">
 
   <link href="./bootstrap-5.3.2/bootstrap-5.3.2/dist/js/bootstrap.min.js" rel="stylesheet">
 
@@ -73,11 +74,23 @@
         <li style="color: #f5f5f5;"><a href="acceuil.html">Accueil</a></li>
         <li style="color: #f5f5f5;"><a href="chambres.html">Chambres</a></li>
         <li style="color: #f5f5f5;"><a href="services.html">Services</a></li>
+        <li id="profileLink" style="color: #f5f5f5; display: none;"> 
+          <a href="profile.html">  <i class="fas fa-user"></i>Profil
+          </a>
+        </li>
         <li style="color: #f5f5f5;"><a href="contact.html">Contact</a></li>
-        <li class="right-btn" style="color: #f5f5f5;"><a href="inscrit.html"><i class="fas fa-user-plus"></i>
-            Inscription</a></li>
+        <li class="right-btn" style="color: #f5f5f5;"><a href="inscrit.html"  id="isc"><i class="fas fa-user-plus"></i>
+          Inscription</a></li>
+          <li class="right-btn" style="color: #f5f5f5;"><a href="login.html"  id="login"><i class="fas fa-user"></i>
+            Connexion</a></li>
         <li class="right-btn" style="color: #f5f5f5;"><a href="reservation.html"><i class="fas fa-calendar-plus"></i>
             Réservation</a></li>
+        <li id="logoutLink" style="color: #f5f5f5; display: none;">
+              <a href="#" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i> Déconnexion
+              </a>
+            </li>
+            
       </ul>
     </nav>
   </header>
@@ -260,6 +273,38 @@
   </footer>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script>
+    function logout() {
+    localStorage.clear();
+    window.location.href = 'acceuil.html'; // Redirection après déconnexion
+  }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const connected = localStorage.getItem('connected');
+  
+      const inscriptionLink = document.getElementById('isc');
+      const loginLink = document.getElementById('login');
+      const profileLink = document.getElementById('profileLink');
+      const logoutLink = document.getElementById('logoutLink');
+
+      if (connected && connected === 'true') {
+
+        inscriptionLink.style.display = 'none';
+        loginLink.style.display = 'none';
+        logoutLink.style.display = 'inline-block';
+        profileLink.style.display = 'inline-block';
+
+      } else {
+        
+        inscriptionLink.style.display = 'inline-block';
+        loginLink.style.display = 'inline-block';
+        profileLink.style.display = 'none';
+        logoutLink.style.display = 'none';
+      }
+    });
+  </script>
+  
+  
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 

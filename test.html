@@ -1,0 +1,89 @@
+ 
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription Client</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+     <title>Inscription Client</title>
+</head>
+<body>
+    <header style="background-color: rgb(136, 199, 255);">
+        <div class="animated-text"></div>
+        <nav>
+            <ul>
+                <li><a href="acceuil.html">Accueil</a></li>
+                <li><a href="chambres.html">Chambres</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li class="right-btn"><a href="inscrit.html"><i class="fas fa-user-plus"></i> Inscription</a></li>
+                <li class="right-btn"><a href="reservation.html"><i class="fas fa-calendar-plus"></i> Réservation</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h2 style="text-align: center;">Inscription Client</h2>
+        <section class="booking-form">
+            <form id="registrationForm" action="BackPHP/upload.php" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="nom" class="form-label">Nom</label>
+                    <input type="text" class="form-control" id="nom" name="nom" required>
+                </div>
+                <div class="mb-3">
+                    <label for="prenom" class="form-label">Prénom</label>
+                    <input type="text" class="form-control" id="prenom" name="prenom" required>
+                </div>
+                <div class="mb-3">
+                    <label for="naiss" class="form-label">Date Naissance</label>
+                    <input type="date" class="form-control" id="naiss" name="naiss" required>
+                </div>
+                <div class="mb-3">
+                    <label for="lieu" class="form-label">Lieu De Naissance</label>
+                    <input type="text" class="form-control" id="lieu" name="lieu" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Adresse Email</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="pass" class="form-label">Mot de passe</label>
+                    <input type="password" class="form-control" id="pass" name="pass" required>
+                </div>
+                <div class="mb-3">
+                    <label for="confirm-password" class="form-label">Confirmer le mot de passe</label>
+                    <input type="password" class="form-control" id="confirm-password" name="confirm-password" required>
+                </div>
+                <div class="mb-3">
+                    <label for="pdfFile" class="form-label">Upload PDF</label>
+                    <input type="file" class="form-control" id="pdfFile" name="pdfFile">
+                </div>
+                <div class="mb-3">
+                    <label for="fileToUpload">Sélectionner une image:</label>
+                <input type="file" name="fileToUpload" id="fileToUpload" required><br><br>
+                
+                </div>
+              
+
+                <button type="submit" class="btn btn-primary" name="submit">Inscription</button>
+            </form>
+            <div id="responseMessage" class="mt-3"></div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const message = urlParams.get('message');
+            const type = urlParams.get('type');
+            const responseMessage = document.getElementById('responseMessage');
+
+            if (message) {
+                responseMessage.innerHTML = `<p class="${type === 'success' ? 'text-success' : 'text-danger'}">${message}</p>`;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histogramme des Utilisateurs</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .chart-container > div {
+            flex: 1;
+            margin: 0 10px;
+            width: calc(50% - 20px); /* 50% width with margin */
+            min-width: 300px; /* Minimum width for better responsiveness */
+        }
+
+        @media (max-width: 768px) {
+            .chart-container > div {
+                width: calc(100% - 20px); /* Full width on smaller screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="chart-container">
+        <div>
+            <h2 style="text-align: center;">Histogramme des Utilisateurs selon le Genre</h2>
+            <canvas id="userChart"></canvas>
+        </div>
+        <div>
+            <h2 style="text-align: center;">Histogramme des Utilisateurs selon la Date de Naissance</h2>
+            <canvas id="birthdateChart"></canvas>
+        </div>
+        <div>
+            <h2 style="text-align: center;">Graphique en Aire Polaire des Dates de Naissance</h2>
+            <canvas id="birthdateChart1"></canvas>
+        </div>
+        
+        <!-- Nouvelle section pour le Donut Chart des réservations par chambre -->
+        <div>
+            <h2 style="text-align: center;">Donut Chart des Réservations par Chambre</h2>
+            <canvas id="roomReservationChart"></canvas>
+        </div>
+    </div>
+    
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    fetch('./BackPHP/fetch_room_reservations.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erreur HTTP ' + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data); // Affiche les données JSON dans la console
+            // Utilisez ici les données récupérées, par exemple pour construire votre graphique
+        
+             const ids = data.map(entry => entry.chambre_nom);
+
+        const counts = data.map(entry => entry.nombre_reservations);
+
+        const ctx = document.getElementById('roomReservationChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ids, // Utilisez les IDs des chambres comme étiquettes
+                datasets: [{
+                    label: 'Nombre de réservations par chambre',
+                    data: counts,
+                    backgroundColor: 'rgba(75, 92, 92, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        })
+        .catch(error => {
+            console.error('Erreur lors de la récupération des données:', error);
+        });
+});
+
+
+    </script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('./BackPHP/genre_fetch.php')
+                .then(response => response.json())
+                .then(data => {
+                    const genres = data.map(user => user.genre === 'h' ? 'Homme' : 'Femme');
+                    const counts = data.map(user => user.count);
+
+                    const ctx = document.getElementById('userChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: genres,
+                            datasets: [{
+                                label: 'Nombre d\'utilisateurs',
+                                data: counts,
+                                backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)'],
+                                borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)'],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                });
+            
+            fetch('./BackPHP/fetch_birthdates.php')
+                .then(response => response.json())
+                .then(data => {
+                    const birthdates = data.map(date => new Date(date).getFullYear());
+                    const yearCounts = {};
+                    birthdates.forEach(year => {
+                        yearCounts[year] = (yearCounts[year] || 0) + 1;
+                    });
+
+                    const years = Object.keys(yearCounts);
+                    const counts = Object.values(yearCounts);
+
+                    const ctx1 = document.getElementById('birthdateChart').getContext('2d');
+                    new Chart(ctx1, {
+                        type: 'bar',
+                        data: {
+                            labels: years,
+                            datasets: [{
+                                label: 'Nombre d\'utilisateurs',
+                                data: counts,
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                },
+                                x: {
+                                    type: 'category',
+                                    labels: years
+                                }
+                            }
+                        }
+                    });
+
+                    const ctx2 = document.getElementById('birthdateChart1').getContext('2d');
+                    new Chart(ctx2, {
+                        type: 'polarArea',
+                        data: {
+                            labels: years,
+                            datasets: [{
+                                label: 'Nombre d\'utilisateurs',
+                                data: counts,
+                                backgroundColor: years.map(() => `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 0.2)`),
+                                borderColor: years.map(() => `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 1)`),
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                r: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                });
+        });
+    </script>
+</body>
+</html>

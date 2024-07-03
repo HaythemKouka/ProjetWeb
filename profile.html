@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil de l'utilisateur</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+            margin: auto;
+        }
+        .profile-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .profile-header img {
+            border-radius: 50%;
+            max-width: 150px;
+            height: auto;
+            transition: transform 0.3s ease-in-out;
+        }
+         
+        .profile-header img:hover {
+            transform: scale(1.2);
+        }
+        .profile-item {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .profile-item label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .profile-item span, .profile-item img, .profile-item input {
+            flex: 1;
+            text-align: right;
+        }
+        .profile-item img {
+            max-width: 200px;
+            border-radius: 10px;
+        }
+        .btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .pdf-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .pdf-container iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <form id="editForm">
+    <div class="container">
+        <div class="profile-header">
+            <img id="photo" alt="User Photo" src="https://via.placeholder.com/150">
+            <h2>Profil de l'utilisateur</h2>
+        </div>
+        <div class="profile-item">
+            <label>Nom d'utilisateur:</label>
+            <span id="username"></span>
+            <input type="text" id="username-input" class="form-control" style="display:none;">
+        </div>
+        <div class="profile-item">
+            <label>Email:</label>
+            <span id="email"></span>
+            <input type="email" id="email-input" class="form-control" style="display:none;">
+        </div>
+        <div class="profile-item">
+            <label>Nom:</label>
+            <span id="usersurname"></span>
+            <input type="text" id="usersurname-input" class="form-control" style="display:none;">
+        </div>
+        <div class="profile-item">
+            <label>Date de Naissance:</label>
+            <span id="datenaiss"></span>
+            <input type="date" id="datenaiss-input" class="form-control" style="display:none;">
+        </div>
+        <div class="profile-item">
+            <label>Lieu de Naissance:</label>
+            <span id="lieu_naissance"></span>
+            <input type="text" id="lieu_naissance-input" class="form-control" style="display:none;">
+        </div>
+        
+        <div class="profile-item">
+            <label>Pièce d'identité (PDF):</label>
+            <div class="btn-container">
+                <button type="button" id="btn" class="btn btn-success" onclick="show()">
+                    <i class="fa fa-eye"></i> Afficher
+                </button>
+            </div>
+        </div>
+        <div class="pdf-container" id="pdf_container" style="display: none;">
+            <div id="file_content"></div>
+        </div>
+        <div class="btn-container">
+            <button type="button" id="edit-btn" class="btn btn-primary" onclick="editProfile()">
+                <i class="fa fa-edit"></i> Éditer
+            </button>
+             
+            <button type="button" id="save-btn" class="btn btn-success" style="display:none;" onclick="saveProfile()">
+                <i class="fa fa-save"></i> Enregistrer
+            </button>
+        </div>
+    </div>
+</form>
+    <script>
+     
+
+         function show() {
+            const fileContent = document.getElementById('pdf_container');
+            const btn = document.getElementById('btn');
+            if (fileContent.style.display === 'none') {
+                fileContent.style.display = 'block';
+                btn.innerHTML = '<i class="fa fa-eye-slash"></i> Cacher';
+                btn.classList.remove('btn-success');
+                btn.classList.add('btn-danger');
+            } else {
+                fileContent.style.display = 'none';
+                btn.innerHTML = '<i class="fa fa-eye"></i> Afficher';
+                btn.classList.remove('btn-danger');
+                btn.classList.add('btn-success');
+            }
+        }
+
+        function editProfile() {
+            document.getElementById('edit-btn').style.display = 'none';
+            document.getElementById('edit-btn').style.display = 'none';
+            document.getElementById('save-btn').style.display = 'inline-block';
+
+            const elements = ['username', 'email', 'usersurname', 'datenaiss', 'lieu_naissance'];
+            elements.forEach(element => {
+                document.getElementById(element).style.display = 'none';
+                const inputElement = document.getElementById(`${element}-input`);
+                inputElement.style.display = 'inline-block';
+                inputElement.class  = 'form-control';
+                 inputElement.value = localStorage.getItem(element);
+            });
+        }
+
+        function saveProfile() {
+    const elements = ['username', 'email', 'usersurname', 'datenaiss', 'lieu_naissance'];
+    const formData = new FormData();
+
+    elements.forEach(element => {
+        const inputElement = document.getElementById(`${element}-input`);
+        const newValue = inputElement.value;
+        formData.append(element, newValue);
+
+        localStorage.setItem(element, newValue);
+        document.getElementById(element).textContent = newValue;
+        document.getElementById(element).style.display = 'inline-block';
+        inputElement.style.display = 'none';
+    });
+
+    fetch('./BackPHP/edit_profile.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data); // Affiche le message de retour du serveur
+        // Afficher un message de succès ou gérer d'autres actions si nécessaire
+    })
+    .catch(error => {
+        console.error('Erreur lors de la mise à jour du profil :', error);
+        // Afficher un message d'erreur ou gérer les erreurs
+    });
+
+    document.getElementById('edit-btn').style.display = 'inline-block';
+    document.getElementById('save-btn').style.display = 'none';
+}
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Récupérer l'e-mail depuis le localStorage
+            const email = localStorage.getItem('email');
+            const userId = localStorage.getItem('id'); 
+            // Assurez-vous que vous avez également enregistré 'id' dans localStorage
+
+            // Vérifier si l'e-mail existe
+            if (email) {
+                // Afficher les données de l'utilisateur dans les éléments HTML correspondants
+                document.getElementById('username').textContent = localStorage.getItem('username');
+                document.getElementById('email').textContent = localStorage.getItem('email');
+                document.getElementById('usersurname').textContent = localStorage.getItem('usersurname');
+                document.getElementById('datenaiss').textContent = localStorage.getItem('datenaiss');
+                document.getElementById('lieu_naissance').textContent = localStorage.getItem('lieu_naissance');
+                const photoData = localStorage.getItem('photo');
+                if (photoData) {
+                    const photoElement = document.getElementById('photo');
+                    photoElement.src = `data:image/jpeg;base64,${photoData}`;
+                    photoElement.style.display = 'block';
+                } else {
+                    document.getElementById('photo').alt = 'Aucune photo disponible';
+                }
+                // Vérifier si le fichier PDF existe
+                if (localStorage.getItem('file_content')) {
+                    const pdfData = localStorage.getItem('file_content');
+                    const pdfIframe = document.createElement('iframe');
+                    pdfIframe.src = `data:application/pdf;base64,${pdfData}`;
+                    document.getElementById('pdf_container').appendChild(pdfIframe);
+                } else {
+                    document.getElementById('file_content').textContent = 'Aucun fichier PDF disponible';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

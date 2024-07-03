@@ -1,87 +1,146 @@
-<!DOCTYPE html>
-<html lang="fr">
+ 
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Inscription Client</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link rel="stylesheet" href="style.css">
+         <title>Inscription Client</title>
+    </head>
+    <body>
+        <header style="background-color: rgb(136, 199, 255);">
+            <div class="animated-text"></div>
+            <nav>
+                <ul>
+                  <li style="color: #f5f5f5;"><a href="acceuil.html">Accueil</a></li>
+                  <li style="color: #f5f5f5;"><a href="chambres.html">Chambres</a></li>
+                  <li style="color: #f5f5f5;"><a href="services.html">Services</a></li>
+                  <li id="profileLink" style="color: #f5f5f5; display: none;"> 
+                    <a href="profile.html">  <i class="fas fa-user"></i>Profil
+                    </a>
+                  </li>
+                  <li style="color: #f5f5f5;"><a href="contact.html">Contact</a></li>
+                  <li class="right-btn" style="color: #f5f5f5;"><a href="inscrit.html"  id="isc"><i class="fas fa-user-plus"></i>
+                    Inscription</a></li>
+                    <li class="right-btn" style="color: #f5f5f5;"><a href="login.html"  id="login"><i class="fas fa-user"></i>
+                      Connexion</a></li>
+                  <li class="right-btn" style="color: #f5f5f5;"><a href="reservation.html"><i class="fas fa-calendar-plus"></i>
+                      Réservation</a></li>
+                  <li id="logoutLink" style="color: #f5f5f5; display: none;">
+                        <a href="#" onclick="logout()">
+                          <i class="fas fa-sign-out-alt"></i> Déconnexion
+                        </a>
+                      </li>
+                      
+                </ul>
+              </nav>
+        </header>
+        <div class="container">
+            <h2 style="text-align: center;">Inscription Client</h2>
+            <section class="booking-form">
+                <form id="registrationForm" action="BackPHP/upload.php" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="nom" class="form-label">Nom</label>
+                        <input type="text" class="form-control" id="nom" name="nom" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="prenom" class="form-label">Prénom</label>
+                        <input type="text" class="form-control" id="prenom" name="prenom" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="naiss" class="form-label">Date Naissance</label>
+                        <input type="date" class="form-control" id="naiss" name="naiss" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="lieu" class="form-label">Lieu De Naissance</label>
+                        <input type="text" class="form-control" id="lieu" name="lieu" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="genre">Genre :</label>
+                        <select id="genre" name="genre" class="form-control" required>
+                            <option value="" disabled selected>Choisir un genre</option>
+                            <option value="f" data-icon="fas fa-female">Femme</option>
+                            <option value="h" data-icon="fas fa-male">Homme</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Adresse Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="pass" class="form-label">Mot de passe</label>
+                        <input type="password" class="form-control" id="pass" name="pass" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirm-password" class="form-label">Confirmer le mot de passe</label>
+                        <input type="password" class="form-control" id="confirm-password" name="confirm-password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="pdfFile" class="form-label">Upload PDF</label>
+                        <input type="file" class="form-control" id="pdfFile" name="pdfFile">
+                    </div>
+                    <div class="mb-3">
+                        <label for="fileToUpload">Sélectionner une image:</label>
+                    <input type="file" name="fileToUpload" id="fileToUpload" required><br><br>
+                    
+                    </div>
+                  
+    
+                    <button type="submit" class="btn btn-primary" name="submit">Inscription</button>
+                </form>
+                <div id="responseMessage" class="mt-3"></div>
+            </section>
+        </div>
+    
+        <script>
+  function logout() {
+    localStorage.clear();
+    window.location.href = 'acceuil.html'; // Redirection après déconnexion
+  }
+ 
+        function updateSelectedOption() {
+             const select = document.getElementById('genre');
+            const selectedOption = select.options[select.selectedIndex];
+            document.getElementById('selected-genre').value = selectedOption.value;
+         }
+     document.addEventListener('DOMContentLoaded', function () {
+      const connected = localStorage.getItem('connected');
+  
+      const inscriptionLink = document.getElementById('isc');
+      const loginLink = document.getElementById('login');
+      const profileLink = document.getElementById('profileLink');
+      const logoutLink = document.getElementById('logoutLink');
 
-<head>
-  <link rel="stylesheet" type="text/css" href="style.css">
+      if (connected && connected === 'true') {
 
-  <link href="./bootstrap-5.3.2/bootstrap-5.3.2/dist/js/bootstrap.min.js" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        inscriptionLink.style.display = 'none';
+        loginLink.style.display = 'none';
+        logoutLink.style.display = 'inline-block';
+        profileLink.style.display = 'inline-block';
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+      } else {
+        
+        inscriptionLink.style.display = 'inline-block';
+        loginLink.style.display = 'inline-block';
+        profileLink.style.display = 'none';
+        logoutLink.style.display = 'none';
+      }
+    });
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inscription Client</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/css/bootstrap.min.css">
-  <style>
-    footer {
-      position: relative;
-      bottom: 0;
-      width: 100%;
-      height: 60px;
-      /* Set the height of the footer */
-      background-color: #f5f5f5;
-      text-align: center;
-      padding-top: 20px;
-    }
-  </style>
-</head>
-
-<body>
-  <header style="background-color: rgb(136, 199, 255);">
-    <div class="animated-text">
-    </div>
-    <nav>
-      <ul>
-        <li style="color: #f5f5f5;"><a href="acceuil.html">Accueil</a></li>
-        <li style="color: #f5f5f5;"><a href="chambres.html">Chambres</a></li>
-        <li style="color: #f5f5f5;"><a href="services.html">Services</a></li>
-        <li style="color: #f5f5f5;"><a href="contact.html">Contact</a></li>
-        <li class="right-btn" style="color: #f5f5f5;"><a href="inscrit.html"><i class="fas fa-user-plus"></i> Inscription</a></li>
-        <li class="right-btn" style="color: #f5f5f5;"><a href="reservation.html"><i class="fas fa-calendar-plus"></i> Réservation</a></li>
-      </ul>
-    </nav>
-  </header>
-  <div class="container">
-    <h2 style="text-align: center;">Inscription Client</h2>
-    <section class="booking-form">
-      <form>
-        <div class="mb-3">
-          <label for="nom" class="form-label">Nom</label>
-          <input type="text" class="form-control" id="nom" required>
-        </div>
-        <div class="mb-3">
-          <label for="prenom" class="form-label">Prénom</label>
-          <input type="text" class="form-control" id="prenom" required>
-        </div>
-        <div class="mb-3">
-          <label for="naiss" class="form-label">Date Naissance</label>
-          <input type="date" class="form-control" id="naiss" required>
-        </div>
-        <div class="mb-3">
-          <label for="lieu" class="form-label">Lieu De Naissance</label>
-          <input type="text" class="form-control" id="lieu" required>
-        </div>
-        <div class="mb-3">
-          <label for="email" class="form-label">Adresse Email</label>
-          <input type="email" class="form-control" id="email" required>
-        </div>
-        <div class="mb-3">
-          <label for="password" class="form-label">Mot de passe</label>
-          <input type="password" class="form-control" id="password" required>
-        </div>
-        <div class="mb-3">
-          <label for="confirm-password" class="form-label">Confirmer le mot de passe</label>
-          <input type="password" class="form-control" id="confirm-password" required>
-        </div>
-        <button type="submit" class="btn btn-primary">S'inscrire</button>
-      </form>
-    </section>
-  </div>
-  <footer>
-    <p>&copy; 2023 Réservation d'Hôtel</p>
-  </footer>
-</body>
-
-</html>
+            document.addEventListener('DOMContentLoaded', function() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const message = urlParams.get('message');
+                const type = urlParams.get('type');
+                const responseMessage = document.getElementById('responseMessage');
+    
+                if (message) {
+                    responseMessage.innerHTML = `<p class="${type === 'success' ? 'text-success' : 'text-danger'}">${message}</p>`;
+                }
+            });
+        </script>
+    </body>
+    </html>
+    

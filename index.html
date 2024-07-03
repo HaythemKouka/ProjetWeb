@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Connexion à la Base de Données</title>
+    <style>
+        /* Styles de base pour une présentation simple */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #status {
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test de Connexion à la Base de Données</h1>
+    <div id="status">
+        Chargement...
+    </div>
+
+    <script>
+        // Fonction pour tester la connexion à la base de données
+        function testDatabaseConnection() {
+            // URL du fichier PHP qui teste la connexion
+            const url = 'http://localhost/ProjetWeb-main/BackPHP/test_config.php';
+
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erreur HTTP ' + response.status);
+                    }
+                    return response.json(); // Convertir la réponse en JSON
+                })
+                .then(data => {
+                    // Traiter les données JSON ici
+                    console.log(data); // Afficher les données dans la console par exemple
+                    const statusDiv = document.getElementById('status');
+                    statusDiv.innerHTML = `
+                        <p><strong>Statut:</strong> ${data.message}</p>
+                        <p><strong>Heure actuelle sur le serveur:</strong> ${data.current_time}</p>
+                    `;
+                    statusDiv.style.borderColor = 'green';
+                })
+                .catch(error => {
+                    console.error('Erreur de fetch:', error);
+                    const statusDiv = document.getElementById('status');
+                    statusDiv.innerHTML = `<p><strong>Erreur:</strong> Échec de la connexion à la base de données.</p>`;
+                    statusDiv.style.borderColor = 'red';
+                });
+        }
+
+        // Appeler la fonction pour tester la connexion à la base de données lors du chargement de la page
+        window.onload = testDatabaseConnection;
+    </script>
+</body>
+</html>

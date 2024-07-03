@@ -36,45 +36,65 @@
   </header>
   <h1 style="text-align: center;">Réservation d'Hôtel</h1>
 
-  <section class="booking-form">
-    <h2 style="align-content:center ;">Réservez votre séjour</h2>
-    <form action="#" method="post">
-      <label for="check-in">Date d'arrivée:</label>
-      <input type="date" id="check-in" name="check-in" required>
-
-      <label for="check-out">Date de départ:</label>
-      <input type="date" id="check-out" name="check-out" required>
-
-      <label for="guests">Nombre d'invités:</label>
-      <input type="number" id="guests" name="guests" min="1" required>
-
-      <div>
-        <label for="breakfast">Petit déjeuner inclus:</label>
-        <input type="checkbox" id="breakfast" name="breakfast">
-      </div>
-
-      <label for="room-type">Type de chambre:</label>
-      <select id="room-type" name="room-type">
-        <option value="standard">Standard</option>
-        <option value="deluxe">Deluxe</option>
-        <option value="suite">Suite</option>
-      </select>
-
-      <p>Préférence de lit:</p>
-      <div><label for="bed-single">Lit simple</label>
-        <input type="radio" id="bed-single" name="bed-type" value="single">
-      </div>
-      <div>
-        <label for="bed-double">Lit double</label>
-        <input type="radio" id="bed-double" name="bed-type" value="double">
-      </div>
-
-      <button type="submit" class="btn btn-outline-dark">Réserver</button>
-      <div class="alert alert-warning" style="margin-top: 10px;" role="alert">
-        Pour valider la réservation, il faut remplir tous les champs.
-      </div>
-    </form>
-
+  
+      <section class="booking-form">
+        <h2 style="align-content:center ;">Réservez votre séjour</h2>
+        <form action="./process.php" method="post">
+          <label for="check-in">Date d'arrivée:</label>
+          <input type="date" id="check-in" name="check-in" required>
+    
+          <label for="check-out">Date de départ:</label>
+          <input type="date" id="check-out" name="check-out" required>
+    
+          <label for="guests">Nombre d'invités:</label>
+          <input type="number" id="guests" name="guests" min="1" required>
+    
+          <div>
+            <label for="breakfast">Petit déjeuner inclus:</label>
+            <input type="checkbox" id="breakfast" name="breakfast">
+          </div>
+    
+          <label for="room-type">Type de chambre:</label>
+          <select id="room-type" name="room-type">
+            <option value="standard">Standard</option>
+            <option value="deluxe">Deluxe</option>
+            <option value="suite">Suite</option>
+          </select>
+    
+          <p>Préférence de lit:</p>
+          <div><label for="bed-single">Lit simple</label>
+            <input type="radio" id="bed-single" name="bed-type" value="single">
+          </div>
+          <div>
+            <label for="bed-double">Lit double</label>
+            <input type="radio" id="bed-double" name="bed-type" value="double">
+          </div>
+    
+          <!-- Champ caché pour stocker l'ID de la chambre -->
+          <input type="hidden" id="chambre-id" name="chambre-id">
+    
+          <button type="submit" class="btn btn-outline-dark">Réserver</button>
+          <div class="alert alert-warning" style="margin-top: 10px;" role="alert">
+            Pour valider la réservation, il faut remplir tous les champs.
+          </div>
+        </form>
+      </section>
+    
+      <footer>
+        <p>&copy; 2023 Réservation d'Hôtel</p>
+      </footer>
+    
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      <script>
+        // JavaScript pour récupérer et stocker l'ID de la chambre depuis localStorage
+        var chambreId = localStorage.getItem('selectedChambreId');
+        document.getElementById('chambre-id').value = chambreId;
+      </script>
+    </body>
+    </html>
+    
   </section>
   <footer>
     <p>&copy; 2023 Réservation d'Hôtel</p>
@@ -83,6 +103,11 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    // JavaScript pour récupérer et stocker l'ID de la chambre depuis localStorage
+    var chambreId = localStorage.getItem('chambreId');
+    document.getElementById('chambre-id').value = chambreId;
+  </script>
 </body>
 
 </html>
