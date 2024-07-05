@@ -19,11 +19,11 @@ if ($conn->connect_error) {
 $username = $_POST['username'];
 $password = $_POST['password'];
  // Préparer la requête SQL
-$sql = "SELECT passwd, username, usersurname, email, datenaiss, lieu_naissance, file_content,photo FROM users WHERE email = ?";
+$sql = "SELECT id, passwd, username, usersurname, email, datenaiss, lieu_naissance, file_content,photo FROM users WHERE email = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param('s', $username);
 $stmt->execute();
-$stmt->bind_result($hashed_password, $db_username, $db_usersurname, $db_email, $db_datenaiss, $db_lieu_naissance, $db_file_content,$img);
+$stmt->bind_result($uid, $hashed_password, $db_username, $db_usersurname, $db_email, $db_datenaiss, $db_lieu_naissance, $db_file_content,$img);
 $stmt->fetch();
 
 if ($hashed_password && password_verify($password, $hashed_password)) {
@@ -34,6 +34,7 @@ if ($hashed_password && password_verify($password, $hashed_password)) {
         'username' => $db_username,
         'usersurname' => $db_usersurname,
         'email' => $db_email,
+        'uid' => $uid,
         'photo' => $img,
         'datenaiss' => $db_datenaiss,
         'lieu_naissance' => $db_lieu_naissance,

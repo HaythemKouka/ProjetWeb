@@ -7,15 +7,16 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .chart-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
+            display: grid;
+  grid-template-columns: auto auto auto ;
             margin-top: 20px;
+   padding: 10px;
+   align-items: center;
+
         }
 
         .chart-container > div {
             flex: 1;
-            margin: 0 10px;
             width: calc(50% - 20px); /* 50% width with margin */
             min-width: 300px; /* Minimum width for better responsiveness */
         }
@@ -30,23 +31,27 @@
 <body>
     <div class="chart-container">
         <div>
-            <h2 style="text-align: center;">Histogramme des Utilisateurs selon le Genre</h2>
-            <canvas id="userChart"></canvas>
+            <canvas id="userChart"></canvas>             
+                <figcaption>Histogramme des Utilisateurs selon le Genre</figcaption>
+                
+            
+ 
         </div>
         <div>
-            <h2 style="text-align: center;">Histogramme des Utilisateurs selon la Date de Naissance</h2>
-            <canvas id="birthdateChart"></canvas>
+            <canvas id="birthdateChart"></canvas>            <figcaption style="text-align: center;">Histogramme des Utilisateurs selon la Date de Naissance</figcaption>
+
         </div>
         <div>
-            <h2 style="text-align: center;">Graphique en Aire Polaire des Dates de Naissance</h2>
-            <canvas id="birthdateChart1"></canvas>
+            <canvas id="roomReservationChart"></canvas>            <figcaption style="text-align: center;">Donut Chart des Réservations par Chambre</figcaption>
+
+        </div>
+        <div>
+            <canvas id="birthdateChart1"></canvas>            <figcaption style="text-align: center;">Graphique en Aire Polaire des Dates de Naissance</figcaption>
+
         </div>
         
         <!-- Nouvelle section pour le Donut Chart des réservations par chambre -->
-        <div>
-            <h2 style="text-align: center;">Donut Chart des Réservations par Chambre</h2>
-            <canvas id="roomReservationChart"></canvas>
-        </div>
+       
     </div>
     
     <script>

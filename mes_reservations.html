@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Réservations</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Mes Réservations</h1>
+        <table class="table mt-4">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID Réservation</th>
+                    <th scope="col">Date d'Arrivée</th>
+                    <th scope="col">Date de Départ</th>
+                    <th scope="col">Nombre d'Invités</th>
+                    <th scope="col">Petit-déjeuner inclus</th>
+                    <th scope="col">Type de Chambre</th>
+                    <th scope="col">Préférence de Lit</th>
+                    <th scope="col">Coût Total</th>
+                    <th scope="col">Date de Réservation</th>
+                    <th scope="col">Validé</th>
+                </tr>
+            </thead>
+            <tbody id="reservationsBody">
+                <!-- Les données des réservations seront insérées ici dynamiquement -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Inclusion de jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Inclusion de Bootstrap JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // JavaScript pour charger les réservations dans le tableau
+        document.addEventListener('DOMContentLoaded', () => {
+            const userId = localStorage.getItem('uid');
+
+            // Vérifier si userId existe
+            if (userId) {
+                fetch('./BackPHP/load_reservations.php?id=' + userId)
+                    .then(response => response.json())
+                    .then(data => {
+                        const reservationsBody = document.getElementById('reservationsBody');
+
+                        // Vider le corps du tableau
+                        reservationsBody.innerHTML = '';
+
+                        // Vérifier s'il y a des réservations à afficher
+                        if (data && data.length > 0) {
+                            data.forEach(reservation => {
+                                const row = document.createElement('tr');
+                                row.innerHTML = `
+                                    <td>${reservation.id_reservation}</td>
+                                    <td>${reservation.date_arrivee}</td>
+                                    <td>${reservation.date_depart}</td>
+                                    <td>${reservation.nombre_invites}</td>
+                                    <td>${reservation.petit_dejeuner_inclus ? 'Oui' : 'Non'}</td>
+                                    <td>${reservation.type_chambre}</td>
+                                    <td>${reservation.preference_lit}</td>
+                                    <td>${reservation.cout_total}</td>
+                                    <td>${reservation.date_res}</td>
+                                    <td>${reservation.validated ==1 ? 'Validé' : 'Non'}</td>
+                                `;
+                                reservationsBody.appendChild(row);
+                            });
+                        } else {
+                            const noDataRow = document.createElement('tr');
+                            noDataRow.innerHTML = '<td colspan="10" class="text-center">Aucune réservation trouvée.</td>';
+                            reservationsBody.appendChild(noDataRow);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erreur lors du chargement des réservations :', error);
+                        // Gérer les erreurs de chargement des réservations
+                    });
+            }
+        });
+    </script>
+</body>
+</html>

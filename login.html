@@ -78,16 +78,16 @@
             .then(data => {
                 const messageElement = document.getElementById('message');
                 if (data.success) {
-                    alert(data)
-                     
-                    localStorage.setItem("email",data.email)
+                      localStorage.setItem("email",data.email)
                     localStorage.setItem("usersurname",data.usersurname)
                     localStorage.setItem("username",data.username)
                     localStorage.setItem("datenaiss",data.datenaiss)
                     localStorage.setItem("lieu_naissance",data.lieu_naissance)
                     localStorage.setItem("file_content",data.file_content)
                     localStorage.setItem("photo",data.photo)
+                    localStorage.setItem("uid",data.uid)
                     localStorage.setItem("connected","true")
+
                       window.location.href = './acceuil.html';  
                 } else {
                     messageElement.innerHTML = `<p class="text-danger">${data.message}</p>`;

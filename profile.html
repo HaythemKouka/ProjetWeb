@@ -74,7 +74,9 @@
 <body>
     <form id="editForm">
     <div class="container">
-        <div class="profile-header">
+        <div class="profile-header" style="margin-left: 400px;">
+             <p><a href="./mes_reservations.html">Consulter mes réservations</a></p>
+        </div><div class="profile-header">
             <img id="photo" alt="User Photo" src="https://via.placeholder.com/150">
             <h2>Profil de l'utilisateur</h2>
         </div>
@@ -123,11 +125,20 @@
             <button type="button" id="save-btn" class="btn btn-success" style="display:none;" onclick="saveProfile()">
                 <i class="fa fa-save"></i> Enregistrer
             </button>
+            <button type="button" id="back-btn" class="btn btn-secondary" onclick="goBack()">
+                <i class="fa fa-arrow-left"></i> Retour
+            </button>
         </div>
     </div>
 </form>
+
     <script>
-     
+    
+
+    function goBack() {
+            window.location.href = 'acceuil.html';
+            
+        }
 
          function show() {
             const fileContent = document.getElementById('pdf_container');

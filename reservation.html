@@ -72,11 +72,10 @@
     
           <!-- Champ caché pour stocker l'ID de la chambre -->
           <input type="hidden" id="chambre-id" name="chambre-id">
+          <input type="hidden" id="userid" name="userid">
     
           <button type="submit" class="btn btn-outline-dark">Réserver</button>
-          <div class="alert alert-warning" style="margin-top: 10px;" role="alert">
-            Pour valider la réservation, il faut remplir tous les champs.
-          </div>
+           
         </form>
       </section>
     
@@ -91,6 +90,9 @@
         // JavaScript pour récupérer et stocker l'ID de la chambre depuis localStorage
         var chambreId = localStorage.getItem('selectedChambreId');
         document.getElementById('chambre-id').value = chambreId;
+        
+        var userid = localStorage.getItem('uid');
+        document.getElementById('userid').value = userid;
       </script>
     </body>
     </html>
