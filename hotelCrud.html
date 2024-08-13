@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion des Hôtels</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: auto;
+        }
+        .btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Gestion des Hôtels</h2>
+        <div class="btn-container">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addEditHotelModal">
+                <i class="fa fa-plus"></i> Ajouter un hôtel
+            </button>
+        </div>
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Prix par nuit (€)</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="hotelsBody">
+                <!-- Hotels will be dynamically populated here -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Add/Edit Hotel Modal -->
+    <div class="modal fade" id="addEditHotelModal" tabindex="-1" role="dialog" aria-labelledby="addEditHotelModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addEditHotelModalLabel">Ajouter/Modifier un hôtel</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="hotelForm">
+                    <div class="modal-body">
+                        <input type="hidden" id="hotelId" name="hotelId">
+                        <div class="form-group">
+                            <label for="name">Nom de l'hôtel</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="price_per_night">Prix par nuit (€)</label>
+                            <input type="number" class="form-control" id="price_per_night" name="price_per_night" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="image">Image</label>
+                            <input type="file" class="form-control-file" id="image" name="image">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hotel Details Modal -->
+    <div class="modal fade" id="hotelDetailsModal" tabindex="-1" role="dialog" aria-labelledby="hotelDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="hotelDetailsModalLabel">Détails de l'hôtel</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="hotelDetailsBody">
+                    <!-- Hotel details will be populated here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap and jQuery scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Your custom JavaScript for CRUD operations -->
+    <script>
+        $(document).ready(function() {
+            // Load hotels on page load
+            loadHotels();
+
+            // Function to load hotels into the table
+            function loadHotels() {
+                $.ajax({
+                    url: 'fetch_hotels.php', // PHP script to fetch hotels from database
+                    method: 'GET',
+                    success: function(data) {
+                        $('#hotelsBody').html(data); // Populate hotels into tbody
+                    }
+                });
+            }
+
+            // Submit hotel form for adding/editing hotel
+            $('#hotelForm').on('submit', function(e) {
+                e.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    url: 'save_hotel.php', // PHP script to save hotel details
+                    method: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        alert(response); // Show success message or handle error
+                        $('#hotelForm')[0].reset(); // Reset form after submission
+                        $('#hotelId').val(''); // Clear hidden input for hotelId
+                        $('#addEditHotelModal').modal('hide'); // Hide the modal
+                        loadHotels(); // Reload hotels in table
+                    }
+                });
+            });
+
+            // Load hotel details into modal
+            $(document).on('click', '.viewHotelBtn', function() {
+                var hotelId = $(this).data('hotelid');
+                console.log('Edit button clicked for hotel ID: ' + hotelId);
+
+                $.ajax({
+                    url: 'fetch_hotel.php',
+                    method: 'POST',
+                    data: { hotelId: hotelId },
+                    dataType: 'html',
+                    success: function(data) {
+                        $('#hotelDetailsBody').html(data);
+                        console.log(data);
+                        $('#hotelDetailsModal').modal('show');
+                    }
+                });
+            });
+
+            // Edit hotel - populate form with existing data
+            $(document).on('click', '.editHotelBtn', function() {
+                var hotelId = $(this).data('hotelid');
+                console.log('Edit button clicked for hotel ID: ' + hotelId);
+
+                $.ajax({
+                    url: 'fetch_hotel.php',
+                    method: 'POST',
+                    data: { hotelId: hotelId },
+                    dataType: 'json',
+                    success: function(data) {
+                        $('#hotelId').val(data.id);
+                        $('#name').val(data.name);
+                        $('#description').val(data.description);
+                        $('#price_per_night').val(data.price_per_night);
+                        // Handle image display if needed
+                        $('#addEditHotelModal').modal('show');
+                    }
+                });
+            });
+
+            // Delete hotel
+            $(document).on('click', '.deleteHotelBtn', function() {
+                if (confirm('Êtes-vous sûr de vouloir supprimer cet hôtel ?')) {
+                    var hotelId = $(this).data('hotelid');
+                    $.ajax({
+                        url: 'delete_hotel.php',
+                        method: 'POST',
+                        data: { hotelId: hotelId },
+                        success: function(response) {
+                            alert(response); // Show success message or handle error
+                            loadHotels(); // Reload hotels in table
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -16,7 +16,7 @@ if ($conn->connect_error) {
 }
 
 $email = $_POST['email'];
-$newPassword = $_POST['newPassword'];
+$newPassword = generateRandomPassword();
 $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
 
 // Update the user's password in the database
@@ -45,13 +45,72 @@ if ($conn->query($sql) === TRUE) {
         $mail->Body = "Votre nouveau mot de passe est : $newPassword";
 
         $mail->send();
-        echo 'Un nouveau mot de passe a été envoyé à votre adresse e-mail.';
+        $message = 'Un nouveau mot de passe a été envoyé à votre adresse e-mail.';
+        $messageClass = 'text-success';
     } catch (Exception $e) {
-        echo "Le message n'a pas pu être envoyé. Erreur: {$mail->ErrorInfo}";
+        $message = 'Le message n\'a pas pu être envoyé. Erreur: ' . $mail->ErrorInfo;
+        $messageClass = 'text-danger';
     }
 } else {
-    echo "Erreur lors de la mise à jour du mot de passe: " . $conn->error;
+    $message = 'Erreur lors de la mise à jour du mot de passe: ' . $conn->error;
+    $messageClass = 'text-danger';
 }
 
 $conn->close();
+
+function generateRandomPassword($length = 8) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomPassword = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomPassword .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomPassword;
+}
 ?>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réinitialisation du mot de passe</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center">
+        <h2>Réinitialisation du mot de passe</h2>
+        <p class="message <?php echo $messageClass; ?>"><?php echo $message; ?></p>
+        <div class="mt-4">
+            <a href="login.html" class="btn btn-primary">Retour à la connexion</a>
+        </div>
+    </div>
+</body>
+</html>

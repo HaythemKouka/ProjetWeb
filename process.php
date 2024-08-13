@@ -22,7 +22,7 @@ $type_chambre = $_POST['room-type'];
 $preference_lit = isset($_POST['bed-type']) ? $_POST['bed-type'] : '';
 $id_chambre = $_POST['chambre-id']; // Récupérez l'ID de la chambre depuis le formulaire
 $cout_total = 0; // Calculer le coût total si nécessaire
-$sql_chambre = "SELECT cout, pourcentage_remise FROM chambres WHERE id = $id_chambre";
+$sql_chambre = " SELECT * FROM chambres WHERE id = $id_chambre ";
 $result_chambre = $conn->query($sql_chambre);
 
 if ($result_chambre->num_rows > 0) {
